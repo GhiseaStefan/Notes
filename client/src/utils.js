@@ -1,6 +1,7 @@
 import axios from 'axios';
 
-const SERVER = 'https://notesserver-w3zq.onrender.com';
+const SERVER = 'https://notesserver-w3zq.onrender.com:8123';
+// const SERVER = 'http://localhost:8123';
 
 class User {
     constructor(_id, email, token, isLoggedIn) {

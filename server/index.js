@@ -15,6 +15,7 @@ connect();
 
 app.use(express.json());
 app.use(cors({ origin: 'https://notesclient.onrender.com', credentials: true }));
+// app.use(cors({ origin: 'http://localhost:3000', credentials: true }));
 app.use(cookieParser());
 
 app.use('/folder', folderRoute);
@@ -23,6 +24,7 @@ app.use('/user', userRoute);
 app.use(express.static(path.join(__dirname, '../client/public')));
 
 app.get('*', (req, res) => {
+    console.log(path.join(__dirname, '../client/public', 'index.html'));
     res.sendFile(path.join(__dirname, '../client/public', 'index.html'));
 });
 
