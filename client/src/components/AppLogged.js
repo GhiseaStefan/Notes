@@ -18,6 +18,7 @@ const AppLogged = ({ user, setUser }) => {
 
   const handleLogout = async () => {
     const loggedOutUser = await user.logout();
+    localStorage.removeItem('token');
     setUser(loggedOutUser);
   }
 

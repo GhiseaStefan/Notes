@@ -12,7 +12,7 @@ class User {
 
     async checkLoggedIn() {
         try {
-            const response = await axios.get(`${SERVER}/user/authentication`, { withCredentials: true });
+            const response = await axios.get(`${SERVER}/user/authentication?token=${localStorage.getItem('token')}`, { withCredentials: true });
             if (response.status === 200) {
                 return new User(response.data._id, response.data.email, response.data.token, true);
             }

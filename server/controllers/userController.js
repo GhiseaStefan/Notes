@@ -76,7 +76,7 @@ const loginUser = async (req, res) => {
 
 const isUserAuthenticated = async (req, res) => {
     try {
-        const token = req.cookies['auth-token'];
+        const token = req.cookies['auth-token'] || req.query.token;
 
         if (!token) {
             return res.status(401).json({ error: 'Not authenticated' });
