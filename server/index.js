@@ -22,11 +22,11 @@ app.use('/folder', folderRoute);
 app.use('/user', userRoute);
 
 // Serve static assets from the 'client/build' directory
-app.use(express.static(path.join(__dirname, 'client', 'build')));
+app.use(express.static(path.join(__dirname, '../../client/build')));
 
 // Catch-all route to serve the React application
 app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, 'client', 'build', 'index.html'));
+    res.sendFile(path.join(__dirname, '../../client/build', 'index.html'));
 });
 
 app.listen(port, () => {
