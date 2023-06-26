@@ -29,6 +29,29 @@ app.get('*', (req, res) => {
     res.sendFile(path.join(__dirname, '../client/build', 'index.html'));
 });
 
+const fs = require('fs');
+
+function printDirectories(directoryPath, indent = '') {
+    const files = fs.readdirSync(directoryPath);
+
+    for (const file of files) {
+        const filePath = path.join(directoryPath, file);
+        const stats = fs.statSync(filePath);
+
+        if (stats.isDirectory()) {
+            console.log(indent + filePath);
+            printDirectories(filePath, indent + '  ');
+        }
+    }
+}
+
+// Usage example
+const rootFolder = path.resolve(process.cwd());
+console.log('Root folder:', rootFolder);
+console.log('Directories:');
+printDirectories(rootFolder);
+
+
 app.listen(port, () => {
     console.log(`Server running on port ${port}`);
 });
