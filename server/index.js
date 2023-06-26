@@ -13,8 +13,11 @@ const app = express();
 connect();
 
 app.use(express.json());
-app.use(cors({ origin: 'https://notesclient.onrender.com', credentials: true }));
-// app.use(cors({ origin: 'http://localhost:3000', credentials: true }));
+const corsOptions = {
+    origin: process.env.NODE_ENV === 'production' ? 'https://notesclient.onrender.com' : 'http://localhost:3000',
+    credentials: true
+};
+app.use(cors(corsOptions));
 app.use(cookieParser());
 
 app.use('/folder', folderRoute);
@@ -22,4 +25,5 @@ app.use('/user', userRoute);
 
 app.listen(port, () => {
     console.log(`Server running on port ${port}`);
+    console.log(`Environment: ${process.env.NODE_ENV === 'production' ? 'production' : 'development'}`);
 });
