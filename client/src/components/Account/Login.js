@@ -149,8 +149,6 @@ const Login = ({ setUser }) => {
         email: loginData.email,
         password: loginData.password,
         rememberMe: rememberMe
-      }, {
-        withCredentials: true
       });
       if (response.status === 200) {
         setUser(new User(response.data.payload._id, response.data.payload.email, response.data.token, true));

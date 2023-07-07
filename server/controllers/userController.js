@@ -35,7 +35,7 @@ const registerUser = async (req, res) => {
         };
         const options = { expiresIn: '1h' };
         const token = jwt.sign(payload, process.env.SECRET_KEY, options);
-        return res.cookie('auth-token', token, { httpOnly: true, sameSite: 'None', secure: true }).status(201).json({ token, payload });
+        return res.status(201).json({ token, payload });
     } catch (err) {
         console.error(err);
         return res.status(400).json({ error: 'Server error when registering!' });
@@ -67,7 +67,7 @@ const loginUser = async (req, res) => {
         };
         const options = rememberMe ? { expiresIn: '30d' } : { expiresIn: '1h' };
         const token = jwt.sign(payload, process.env.SECRET_KEY, options);
-        return res.cookie('auth-token', token, { httpOnly: true, sameSite: 'None', secure: true }).status(200).json({ token, payload });
+        return res.status(200).json({ token, payload });
     } catch (err) {
         console.error(err);
         return res.status(500).json({ error: 'Server error when logging in!' });
@@ -76,7 +76,7 @@ const loginUser = async (req, res) => {
 
 const isUserAuthenticated = async (req, res) => {
     try {
-        const token = req.cookies['auth-token'] || req.query.token;
+        const token = req.query.token;
 
         if (!token) {
             return res.status(401).json({ error: 'Not authenticated' });

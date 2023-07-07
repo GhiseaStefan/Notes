@@ -116,11 +116,10 @@ const Register = ({ setUser }) => {
         const response = await axios.post(`${SERVER}/user/register`, {
           email: registerData.email,
           password: registerData.password,
-        }, {
-          withCredentials: true
         });
         if (response.status === 201) {
           setUser(new User(response.data.payload._id, response.data.payload.email, response.data.token, true));
+          localStorage.setItem('token', response.data.token);
         }
       } catch (err) {
         if (err.response && err.response.status >= 400 && err.response.status < 500) {

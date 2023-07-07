@@ -12,7 +12,7 @@ class User {
 
     async checkLoggedIn() {
         try {
-            const response = await axios.get(`${SERVER}/user/authentication?token=${localStorage.getItem('token')}`, { withCredentials: true });
+            const response = await axios.get(`${SERVER}/user/authentication?token=${localStorage.getItem('token')}`);
             if (response.status === 200) {
                 return new User(response.data._id, response.data.email, response.data.token, true);
             }
@@ -24,7 +24,7 @@ class User {
 
     async logout() {
         try {
-            const response = await axios.get(`${SERVER}/user/logout`, { withCredentials: true });
+            const response = await axios.get(`${SERVER}/user/logout`);
             if (response.status === 200) {
                 return new User('', '', '', false);
             }
